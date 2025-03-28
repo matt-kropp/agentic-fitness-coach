@@ -179,49 +179,95 @@ export default function Home() {
               <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-7 bg-white rounded-b-lg shadow-sm border-x border-b border-gray-200 divide-y md:divide-y-0 md:divide-x divide-gray-200">
-              {weekDays.map((day) => (
-                <div key={day.dayName} className={`${day.isToday ? 'bg-blue-50' : ''}`}>
-                  {/* Day Header */}
-                  <div className={`p-3 border-b border-gray-200 ${day.isToday ? 'bg-blue-100' : 'bg-gray-50'}`}>
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <p className="font-semibold">{day.dayName}</p>
-                        <p className="text-xs text-gray-500">{day.month} {day.dayOfMonth}</p>
+            <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed' }}>
+              <thead>
+                <tr>
+                  {weekDays.map((day) => (
+                    <th key={day.dayName} style={{ 
+                      padding: '10px', 
+                      textAlign: 'left', 
+                      borderBottom: '1px solid #e5e7eb',
+                      backgroundColor: day.isToday ? '#ebf5ff' : '#f9fafb'
+                    }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <div>
+                          <p style={{ fontWeight: 'bold' }}>{day.dayName}</p>
+                          <p style={{ fontSize: '12px', color: '#6b7280' }}>{day.month} {day.dayOfMonth}</p>
+                        </div>
+                        {day.isToday && (
+                          <span style={{ 
+                            backgroundColor: '#3b82f6', 
+                            color: 'white', 
+                            padding: '2px 8px',
+                            borderRadius: '9999px',
+                            fontSize: '12px'
+                          }}>Today</span>
+                        )}
                       </div>
-                      {day.isToday && (
-                        <Badge className="bg-blue-500 text-white">Today</Badge>
-                      )}
-                    </div>
-                  </div>
-                  
-                  {/* Workouts */}
-                  <div className="p-3 h-full">
-                    {getWorkoutsForDay(day.dayName).length > 0 ? (
-                      <div className="space-y-3">
-                        {getWorkoutsForDay(day.dayName).map((workout: any, index: number) => (
-                          <div key={index} className="border border-gray-200 rounded-md p-3 bg-white shadow-sm">
-                            <Badge className={`mb-2 ${getWorkoutTypeColor(workout.type)}`}>
-                              {workout.type}
-                            </Badge>
-                            <p className="text-sm mb-2">{workout.description}</p>
-                            <div className="flex items-center text-xs text-gray-500">
-                              <Clock className="h-3 w-3 mr-1" />
-                              {workout.duration}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  {weekDays.map((day) => (
+                    <td key={day.dayName} style={{ 
+                      padding: '10px', 
+                      verticalAlign: 'top',
+                      borderRight: '1px solid #e5e7eb',
+                      height: '200px'
+                    }}>
+                      {getWorkoutsForDay(day.dayName).length > 0 ? (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                          {getWorkoutsForDay(day.dayName).map((workout: any, index: number) => (
+                            <div key={index} style={{ 
+                              border: '1px solid #e5e7eb', 
+                              borderRadius: '6px', 
+                              padding: '10px',
+                              backgroundColor: 'white'
+                            }}>
+                              <div style={{ 
+                                display: 'inline-block',
+                                marginBottom: '8px',
+                                padding: '2px 8px',
+                                borderRadius: '9999px',
+                                fontSize: '12px',
+                                backgroundColor: workout.type === 'Strength Training' ? '#dbeafe' : 
+                                                workout.type === 'Cardio' ? '#fee2e2' : 
+                                                workout.type === 'Rest' ? '#f3f4f6' : '#e0f2fe',
+                                color: workout.type === 'Strength Training' ? '#1e40af' : 
+                                       workout.type === 'Cardio' ? '#b91c1c' : 
+                                       workout.type === 'Rest' ? '#374151' : '#0369a1'
+                              }}>
+                                {workout.type}
+                              </div>
+                              <p style={{ fontSize: '14px', marginBottom: '8px' }}>{workout.description}</p>
+                              <div style={{ display: 'flex', alignItems: 'center', fontSize: '12px', color: '#6b7280' }}>
+                                <span style={{ marginRight: '4px' }}>⏱</span>
+                                {workout.duration}
+                              </div>
                             </div>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <div className="flex flex-col items-center justify-center h-full min-h-[100px] text-gray-400">
-                        <Dumbbell className="h-5 w-5 mb-1" />
-                        <p className="text-sm">Rest day</p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div style={{ 
+                          display: 'flex', 
+                          flexDirection: 'column', 
+                          alignItems: 'center', 
+                          justifyContent: 'center',
+                          height: '100%',
+                          color: '#9ca3af'
+                        }}>
+                          <span style={{ marginBottom: '4px' }}>💪</span>
+                          <p style={{ fontSize: '14px' }}>Rest day</p>
+                        </div>
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
+
           )}
 
           {/* Chat Section */}
