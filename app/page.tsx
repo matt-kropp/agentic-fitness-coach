@@ -179,13 +179,20 @@ export default function Home() {
               <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
             </div>
           ) : (
-            <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed' }}>
-              <thead>
-                <tr>
-                  {weekDays.map((day) => (
-                    <th key={day.dayName} style={{ 
-                      padding: '10px', 
-                      textAlign: 'left', 
+            <div className="bg-white rounded-b-lg shadow-sm border-x border-b border-gray-200">
+              <div style={{ display: 'flex', flexDirection: 'row', width: '100%', overflowX: 'auto' }}>
+                {weekDays.map((day) => (
+                  <div key={day.dayName} style={{ 
+                    flex: '1 0 auto', 
+                    minWidth: '150px',
+                    maxWidth: '200px',
+                    borderRight: '1px solid #e5e7eb',
+                    display: 'flex',
+                    flexDirection: 'column'
+                  }}>
+                    {/* Day Header */}
+                    <div style={{ 
+                      padding: '10px',
                       borderBottom: '1px solid #e5e7eb',
                       backgroundColor: day.isToday ? '#ebf5ff' : '#f9fafb'
                     }}>
@@ -204,19 +211,10 @@ export default function Home() {
                           }}>Today</span>
                         )}
                       </div>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  {weekDays.map((day) => (
-                    <td key={day.dayName} style={{ 
-                      padding: '10px', 
-                      verticalAlign: 'top',
-                      borderRight: '1px solid #e5e7eb',
-                      height: '200px'
-                    }}>
+                    </div>
+                    
+                    {/* Workouts */}
+                    <div style={{ padding: '10px', height: '100%' }}>
                       {getWorkoutsForDay(day.dayName).length > 0 ? (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                           {getWorkoutsForDay(day.dayName).map((workout: any, index: number) => (
@@ -256,17 +254,18 @@ export default function Home() {
                           alignItems: 'center', 
                           justifyContent: 'center',
                           height: '100%',
+                          minHeight: '150px',
                           color: '#9ca3af'
                         }}>
                           <span style={{ marginBottom: '4px' }}>💪</span>
                           <p style={{ fontSize: '14px' }}>Rest day</p>
                         </div>
                       )}
-                    </td>
-                  ))}
-                </tr>
-              </tbody>
-            </table>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
 
           )}
 
