@@ -104,7 +104,7 @@ const demoResponses = [
   "Given your schedule constraints, I've adjusted your plan to include shorter, more intense workouts on busy days. Does that work for you?"
 ];
 
-export async function chatWithCoach(messages: any[]) {
+export async function chatWithCoach(messages: {role: string, content: string}[]) {
   if (!openai || process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
     console.log('Using demo chat response');
     const randomIndex = Math.floor(Math.random() * demoResponses.length);

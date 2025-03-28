@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import storage, { UserProfile, WorkoutEntry } from '../../utils/storage';
+import storage from '../../utils/storage';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);

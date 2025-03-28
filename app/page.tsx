@@ -93,7 +93,7 @@ export default function Home() {
           <div className="bg-card text-card-foreground rounded-lg shadow-sm p-6 border">
             <h1 className="text-3xl font-bold mb-4">Your Fitness Dashboard</h1>
             <p className="text-lg mb-6">
-              Welcome to your personal AI fitness coach! Here's your weekly workout plan based on your goals and preferences.
+              Welcome to your personal AI fitness coach! Here&apos;s your weekly workout plan based on your goals and preferences.
             </p>
             
             <div className="mb-4 flex flex-wrap gap-2">
