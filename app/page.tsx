@@ -179,11 +179,11 @@ export default function Home() {
               <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-7 bg-white rounded-b-lg shadow-sm border-x border-b border-gray-200 divide-y md:divide-y-0 md:divide-x divide-gray-200">
+            <div className="grid grid-cols-7 bg-white rounded-b-lg shadow-sm border-x border-b border-gray-200 divide-x divide-gray-200">
               {weekDays.map((day) => (
-                <div key={day.dayName} className={`${day.isToday ? 'bg-blue-50' : ''}`}>
+                <div key={day.dayName} className={`${day.isToday ? 'bg-blue-50' : ''} min-h-[300px] flex flex-col`}>
                   {/* Day Header */}
-                  <div className={`p-3 border-b border-gray-200 ${day.isToday ? 'bg-blue-100' : 'bg-gray-50'}`}>
+                  <div className={`p-3 border-b border-gray-200 ${day.isToday ? 'bg-blue-100' : 'bg-gray-50'} sticky top-0`}>
                     <div className="flex justify-between items-center">
                       <div>
                         <p className="font-semibold">{day.dayName}</p>
@@ -196,7 +196,7 @@ export default function Home() {
                   </div>
                   
                   {/* Workouts */}
-                  <div className="p-3 h-full">
+                  <div className="p-3 flex-grow">
                     {getWorkoutsForDay(day.dayName).length > 0 ? (
                       <div className="space-y-3">
                         {getWorkoutsForDay(day.dayName).map((workout: any, index: number) => (
